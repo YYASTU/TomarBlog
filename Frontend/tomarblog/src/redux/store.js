@@ -1,6 +1,6 @@
-// import { createStore } from 'redux';
-// import rootReducer from './reducers'; // Make sure you create reducers
+import { createStore } from 'redux';
+import postReducer from './Posts/postReducers'; // Make sure you create reducers
 
-// const store = createStore(rootReducer);
+const store = createStore(postReducer);
 
-// export default store;
+export default store;
