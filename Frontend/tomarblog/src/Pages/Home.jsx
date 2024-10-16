@@ -30,7 +30,7 @@ const posts = [
       author: "Jane Doe",
       date: "2023-10-01",
       content: "Nature is a great source of inspiration for many. From majestic mountains to serene lakes, the beauty of the outdoors captivates us all.",
-      imageUrl: "https://source.unsplash.com/featured/?nature",
+      imageUrl: "./TomarBlog/TomarBlog/Frontend/tomarblog/src/Assets/isometric-blogging-concept_23-2148004575.jpg",
       likes: 10,
     },
     {
@@ -38,7 +38,7 @@ const posts = [
       author: "John Smith",
       date: "2023-09-20",
       content: "Technology continues to evolve at a rapid pace, transforming the way we live, work, and communicate. Let's explore its wonders!",
-      imageUrl: "https://source.unsplash.com/featured/?technology",
+      imageUrl: "../Assets/isometric-blogging-concept_23-2148004575.jpg",
       likes: 25,
     },
     {
@@ -53,7 +53,7 @@ const posts = [
   return (
     <div className="max-w-2xl mx-auto p-4">
         
-      <h1 className="text-4xl font-bold mb-6">My Blog</h1>
+      <h1 className="text-4xl font-bold mb-6">Blog</h1>
       {dummyPosts.map((post, index) => (
         <BlogPost
           key={index}

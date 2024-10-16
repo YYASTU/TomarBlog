@@ -1,14 +1,31 @@
-import { CREATE_POST } from "./postTypes"
+import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from "./postTypes"
 const initialState = {
-    id: 1,    
+    loading: true,
+    users: [],
+    error: ''   
 }
-const postReducer = (state = initialState, action) =>{
+export const postReducer = (state = initialState, action) =>{
     switch(action.type){
-        case CREATE_POST: return {
+        case FETCH_USERS_REQUEST: 
+        return {
             ...state,
-            id: state.id +1
-        };
-        default: return state
+            loading: true
+        }
+        case FETCH_USERS_SUCCESS: 
+        return {
+            ...state,
+            users: action.payload,
+            loading: false,
+            error: ''
+        }
+        case FETCH_USERS_FAILURE: 
+        return {
+            ...state,
+            users: [],
+            loading: false,
+            errors: action.payload
+        }
+        default: 
+        return state
     }
 }
-export default postReducer

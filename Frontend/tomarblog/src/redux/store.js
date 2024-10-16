@@ -1,6 +1,6 @@
-import { createStore } from 'redux';
-import postReducer from './Posts/postReducers'; // Make sure you create reducers
-
-const store = createStore(postReducer);
-
-export default store;
+import { createStore, applyMiddleware } from 'redux';
+import {postReducer} from './Posts/postReducers'; // Make sure you create reducers
+import {thunk} from 'redux-thunk'
+// import axios from 'axios'
+ const store = createStore(postReducer, applyMiddleware(thunk));
+ export default store;
