@@ -1,4 +1,10 @@
-import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from "./postTypes"
+import { 
+    FETCH_USERS_REQUEST, 
+    FETCH_USERS_SUCCESS, 
+    FETCH_USERS_FAILURE ,
+    CREATE_POST, 
+    EDIT_POST,
+    DELETE_POST} from "./postTypes"
 const initialState = {
     loading: true,
     users: [],
@@ -23,9 +29,15 @@ export const postReducer = (state = initialState, action) =>{
             ...state,
             users: [],
             loading: false,
-            errors: action.payload
+            error: action.payload
         }
-        default: 
+        case CREATE_POST:
+            return{
+                ...state,
+                posts: [...state.posts, action.payload]
+
+            }
+        default:
         return state
     }
 }

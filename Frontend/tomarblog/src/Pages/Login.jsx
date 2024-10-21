@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +12,7 @@ const Login = () => {
     setEmail('');
     setPassword('');
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-400 to-purple-500">
@@ -27,6 +28,7 @@ const Login = () => {
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
               required
             />
+            
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Password</label>

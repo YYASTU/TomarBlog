@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { CREATE_POST } from '../redux/Posts/postTypes';
 
 const CreatePost = ({ onCreate }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [date, setDate] = useState('');
   const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -25,15 +27,14 @@ const CreatePost = ({ onCreate }) => {
     const newPost = {
       title,
       author,
-      date,
       content,
       imageUrl,
     };
+    dispatch({ type: CREATE_POST, payload: newPost });
     onCreate(newPost);
     // Reset the form
     setTitle('');
     setAuthor('');
-    setDate('');
     setContent('');
     setImageUrl('');
     setUploadedImage(null);

@@ -1,24 +1,61 @@
-import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from "./postTypes"
-export const fetchUsersRequest = () =>{ 
+import { 
+    FETCH_POSTS_REQUEST, 
+    FETCH_POSTS_SUCCESS, 
+    FETCH_POSTS_FAILURE, 
+    CREATE_POST,
+    EDIT_POST,
+    DELETE_POST
+ } from "./postTypes"
+import axios from "axios"
+
+export const createPost = (post) =>{
     return {
-        type: FETCH_USERS_REQUEST
+        type: CREATE_POST,
+        payload: post
     }
 }
-export const fetchUsersFailure = (error) =>{ 
+export const editPost = (post) =>{
     return {
-        type: FETCH_USERS_FAILURE,
+        type: EDIT_POST,
+        payload: post
+    }
+}
+export const deletePost = (postId) =>{
+    return {
+        type: DELETE_POST,
+        payload: postId
+    }
+}
+export const fetchPOSTsRequest = () =>{ 
+    return {
+        type: FETCH_POSTS_REQUEST
+        
+    }
+}
+export const fetchPOSTsFailure = (error) =>{ 
+    return {
+        type: FETCH_POSTS_FAILURE,
         payload: error
     }
 }
-export const fetchUsersSuccess = (users)  =>{ 
+export const fetchPOSTsSuccess = (POSTs)  =>{ 
     return {
-        type: FETCH_USERS_SUCCESS,
-        payload: users
+        type: FETCH_POSTS_SUCCESS,
+        payload: posts
     }
 }
  
-// export const fetchPost = () =>{ 
-//     return {
-//         type: FETCH_POST
-//     }
-// }
+export const fetchPOSTs = () =>{
+    return function(dispatch){
+        dispatch(fetchPOSTsRequest())
+        axios.get('http://localhost:5021/api/Person')
+    .then(Response =>{
+        const POSTs = Response.data
+        console.log(posts)
+        dispatch(fetchPOSTsSuccess(posts))
+    })
+    .catch(error => {
+        dispatch(fetchPOSTsFailure(error.message))
+    })
+    }
+}
