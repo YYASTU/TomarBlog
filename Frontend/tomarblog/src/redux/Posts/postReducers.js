@@ -1,33 +1,33 @@
 import { 
-    FETCH_USERS_REQUEST, 
-    FETCH_USERS_SUCCESS, 
-    FETCH_USERS_FAILURE ,
     CREATE_POST, 
     EDIT_POST,
-    DELETE_POST} from "./postTypes"
+    DELETE_POST,
+    FETCH_POSTS_FAILURE,
+    FETCH_POSTS_SUCCESS,
+    FETCH_POSTS_REQUEST} from "./postTypes"
 const initialState = {
-    loading: true,
-    users: [],
+    posts: [],
+    loading: false,    
     error: ''   
 }
 export const postReducer = (state = initialState, action) =>{
     switch(action.type){
-        case FETCH_USERS_REQUEST: 
+        case FETCH_POSTS_REQUEST: 
         return {
             ...state,
             loading: true
         }
-        case FETCH_USERS_SUCCESS: 
+        case FETCH_POSTS_SUCCESS: 
         return {
             ...state,
-            users: action.payload,
+            posts: action.payload,
             loading: false,
             error: ''
         }
-        case FETCH_USERS_FAILURE: 
+        case FETCH_POSTS_FAILURE: 
         return {
             ...state,
-            users: [],
+            posts: [],
             loading: false,
             error: action.payload
         }

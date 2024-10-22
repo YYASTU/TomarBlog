@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPost } from '../redux/Posts/postActions';
 
 const BlogPost = ({ title, author, date, content, imageUrl, likes }) => {
   imageUrl = './TomarBlog/TomarBlog/Frontend/tomarblog/src/Assets/isometric-blogging-concept_23-2148004575.jpg'
+  const dispatch = useDispatch();
+  const { posts, loading, error } = useSelector(state => state.posts); 
+  useEffect(()=>{
+    dispatch(fetchPost())
+  },[dispatch])
+  const authors = posts.map(post => (post.firstName));
+
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden gap-3">
       <img src="https://img.freepik.com/free-vector/isometric-blogging-concept_23-2148004575.jpg?t=st=1728986723~exp=1728990323~hmac=89292511e15e29ae35ba527d615c2cce0567173eed53f7f4128621d42c2e57c2&w=740" alt={title} className="w-full h-48 object-cover mt-15" />
       <div className="p-5">
         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
         <div className="flex items-center mt-2 text-gray-600">
-          <p className="mr-2">{author}</p>
+          <p className="mr-2">{authors}</p>
           <span className="text-sm">•</span>
           <p className="ml-2 text-sm">{new Date(date).toLocaleDateString()}</p>
         </div>

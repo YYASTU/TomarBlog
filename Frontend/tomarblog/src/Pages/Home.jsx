@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SocialMediaPost from '../Components/SocialMediaPost';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CreatePost from '../Components/CreatePost';
+import { fetchPost } from '../redux/Posts/postActions';
 
 const Home = () => {
   const dummyPosts = [
@@ -42,8 +43,26 @@ const Home = () => {
       ],
     },
   ];
-  const post = useSelector(state => state.post);
-  console.log("these are the posts :" + post)
+  const dispatch = useDispatch();
+  const { posts, loading, error } = useSelector(state => state.posts); 
+  useEffect(()=>{
+    dispatch(fetchPost())
+  },[dispatch])
+  const post = posts.map((post)=>{
+    console.log(post.firstName)
+  })
+  const postElements = posts.map((post, index) => (
+    <SocialMediaPost
+      key={index}
+      title={post.title || "Untitled"} // Make sure title exists
+      author={post.author || "Unknown"} // Default value if author is missing
+      date={post.date || "Unknown Date"}
+      content={post.content}
+      imageUrl={post.imageUrl || "defaultImage.jpg"} // Fallback image
+      likes={post.likes || 0} // Default likes if not provided
+      comments={post.comments || []} // Ensure comments is an array
+    />
+  ));
 
 
   return (
@@ -62,6 +81,20 @@ const Home = () => {
             comments={post.comments}
           />
         ))}
+        
+        {posts.map((post, index) => (
+          <SocialMediaPost
+            key={index}
+            title="Sample Title" 
+            author={post.firstName} 
+            date="2023-10-01" 
+            content="Sample content here." 
+            imageUrl="https://source.unsplash.com/featured/?nature" 
+            likes={0} 
+            comments={[]} // Placeholder for comments
+          />
+        ))}
+        {posts.length > 0 ? postElements : <p>No posts available.</p>}
       </div>
       <CreatePost/>
     </div>

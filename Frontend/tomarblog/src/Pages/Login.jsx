@@ -14,6 +14,7 @@ const Login = () => {
   };
 
 
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-400 to-purple-500">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full">

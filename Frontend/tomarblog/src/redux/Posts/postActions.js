@@ -26,36 +26,35 @@ export const deletePost = (postId) =>{
         payload: postId
     }
 }
-export const fetchPOSTsRequest = () =>{ 
+export const fetchPostRequest = () =>{ 
     return {
-        type: FETCH_POSTS_REQUEST
-        
+        type: FETCH_POSTS_REQUEST        
     }
 }
-export const fetchPOSTsFailure = (error) =>{ 
+export const fetchPostFailure = (error) =>{ 
     return {
         type: FETCH_POSTS_FAILURE,
         payload: error
     }
 }
-export const fetchPOSTsSuccess = (POSTs)  =>{ 
+export const fetchPostSuccess = (posts)  =>{ 
     return {
         type: FETCH_POSTS_SUCCESS,
         payload: posts
     }
 }
  
-export const fetchPOSTs = () =>{
+export const fetchPost = () =>{
     return function(dispatch){
-        dispatch(fetchPOSTsRequest())
+        dispatch(fetchPostRequest())
         axios.get('http://localhost:5021/api/Person')
     .then(Response =>{
-        const POSTs = Response.data
+        const posts = Response.data
         console.log(posts)
-        dispatch(fetchPOSTsSuccess(posts))
+        dispatch(fetchPostSuccess(posts))
     })
     .catch(error => {
-        dispatch(fetchPOSTsFailure(error.message))
+        dispatch(fetchPostFailure(error.message))
     })
     }
 }
